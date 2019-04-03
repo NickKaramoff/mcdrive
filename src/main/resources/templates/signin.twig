@@ -1,0 +1,39 @@
+{% extends 'common/wrap.twig' %}
+
+{% block title %}Вход{% endblock %}
+
+{% block content %}
+    {% include 'partials/header.twig' %}
+
+    <div class="container">
+        <div class="row">
+            <div class="col p-3">
+                <h3 class="mb-3">Вход</h3>
+                <form method="POST">
+                    <div class="row">
+                        <div class="col-lg-5 col-md-6">
+                            <div class="form-group">
+                                <label for="email">E-Mail</label>
+                                <div class="input-group">
+                                    <input type="email" class="form-control"
+                                           id="email"
+                                           name="email"
+                                           placeholder="" required>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-5 col-md-6">
+                            <div class="form-group">
+                                <label for="password">Пароль</label>
+                                <input type="password" class="form-control"
+                                       id="password"
+                                       name="password" placeholder="" required>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-success">Войти</button>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

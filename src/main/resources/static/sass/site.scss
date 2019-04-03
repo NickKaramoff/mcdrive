@@ -1,0 +1,129 @@
+$red: #f11814; // danger
+$yellow: #f0c500; // warning
+$green: #00b400; // success
+$dark-grey: #656565; // menu item
+$light-grey: #c2c2c2; // disabled
+
+.navbar .navbar-brand {
+    font-family: "Yellowtail", cursive;
+    font-weight: 400;
+    font-size: 1.5rem;
+}
+
+.btn-outline-secondary {
+    border: 1px solid rgba(0, 0, 0, .125)
+}
+
+.btn-outline-success {
+    color: $green;
+    border-color: $green;
+    &:hover {
+        color: #fff;
+        background-color: rgba($color: $green, $alpha: 0.75)
+    }
+
+    &:active,
+    &.active {
+        color: #fff;
+        background-color: $green;
+    }
+}
+
+/*
+ * HOVER
+ *
+ * These elements change background and text color as well as add transition
+ */
+
+.hover {
+    transition-property: all;
+    transition-duration: .25s;
+    &:hover {
+        transition-property: all;
+        transition-duration: .25s;
+    }
+    &.hover-danger:hover {
+        color: #ffffff;
+        background-color: $red;
+    }
+    &.hover-warning:hover {
+        color: #000000;
+        background-color: $yellow;
+    }
+    &.hover-success:hover {
+        background-color: $green;
+        color: #fff;
+    }
+}
+
+/* Date specifically should be of lighter color */
+
+.card-title#current-date {
+    color: $dark-grey;
+}
+
+.display-4 {
+    font-size: 2.8rem;
+}
+
+/* Color of the '#' sign in order number should be lighter */
+
+.display-4>small {
+    color: inherit;
+    opacity: .5;
+}
+
+.foodpieceorder .foodpieceorder-modification {
+    list-style-type: disc;
+}
+
+.btn:focus,
+.btn.focus {
+    outline: none !important;
+    box-shadow: none !important;
+}
+
+.list-group {
+    .list-group-item {
+        svg {
+            fill: $dark-grey;
+            margin-right: 5px;
+        }
+        &.disabled {
+            color: $light-grey;
+            svg {
+                fill: $light-grey;
+            }
+            &:hover {
+                color: $light-grey;
+            }
+        }
+        &.hover-success:hover {
+            svg {
+                fill: #fff;
+            }
+        }
+        &.hover-danger:hover {
+            svg {
+                fill: #fff;
+            }
+        }
+        &.hover-warning:hover {
+            svg {
+                fill: #000;
+            }
+        }
+    }
+}
+
+.delete-button {
+    text-decoration: none;
+    color: $light-grey;
+    transition: .25s color;
+    margin-right: 10px;
+
+    &:hover {
+        text-decoration: none;
+        color: $red;
+    }
+}
