@@ -32,17 +32,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/signin").permitAll()
                 .antMatchers("/").authenticated()
-                .and()
+                    .and()
                 .formLogin()
                 .loginPage("/signin")
                 .usernameParameter("email")
                 .passwordParameter("password")
-                .failureUrl("/signin?error")
-                .permitAll()
-                .defaultSuccessUrl("/")
-                .permitAll()
-                .and()
-                .logout().logoutSuccessUrl("/signin")
+                .failureUrl("/signin?error").permitAll()
+                .defaultSuccessUrl("/").permitAll()
+                    .and()
+                .logout()
+                .logoutSuccessUrl("/signin")
                 .permitAll();
     }
 

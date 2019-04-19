@@ -1,0 +1,56 @@
+{% extends "common/wrap.twig" %}
+
+{% block content %}
+    {% include "partials/header.twig" with {activeTab: 'orders', role: 'operator'} %}
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 col-lg-9 mb-3 p-3">
+                <a href="" type="button"
+                   class="btn btn-outline-secondary btn-lg btn-block mb-3">
+                    Новый заказ
+                </a>
+                <div class="list-group">
+                    {% for order in orders %}
+                    <div class="list-group-item flex-column align-items-start order">
+                        <div class="d-flex w-100 justify-content-between mb-3">
+                            <h3 class="display-4 m-0">
+                                <small>#</small>
+                                {{ order.id }}
+                            </h3>
+                            <p class="lead text-muted">{{ order.time }}</p>
+                        </div>
+                        <ul class="list-group list-group-flush mb-4">
+                            {% for foodpiece in order.foodpieces %}
+                            <li class="list-group-item d-flex justify-content-between align-items-center">
+                                <div class="foodpieceorder">
+                                    <p class="lead mb-0">{{ foodpiece.name }}</p>
+                                </div>
+                                <div class="btn-group-toggle"
+                                     data-toggle="buttons">
+                                    <label class="btn btn-outline-success {% if foodpiece.ready %}active{% endif %}">
+                                        <input type="checkbox"
+                                               autocomplete="off"
+                                               >
+                                        Готово
+                                    </label>
+                                </div>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                        <div class="btn-group btn-group-toggle d-flex justify-content-end"
+                             data-toggle="buttons" role="group">
+                            <label class="btn btn-lg btn-outline-success disabled">
+                                <input type="checkbox" autocomplete="off"> Готов
+                            </label>
+                            <label class="btn btn-lg btn-outline-success disabled">
+                                <input type="checkbox" autocomplete="off"> Выдан
+                            </label>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

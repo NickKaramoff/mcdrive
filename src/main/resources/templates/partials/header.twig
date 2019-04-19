@@ -1,9 +1,41 @@
 <div class="container pt-2 mb-3">
     <nav class="navbar navbar-expand-md navbar-dark bg-dark rounded">
-        <span class="navbar-brand mx-1 text-light">McDrive</span>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#main-menu-navbar"
-                aria-controls="main-menu-navbar" aria-expanded="false" aria-label="Меню">
+        <span class="navbar-brand mx-1 text-light">
+            McDrive
+            <sup style="opacity:0.5;">{{ role }}</sup>
+        </span>
+        <button class="navbar-toggler" type="button" data-toggle="collapse"
+                data-target="#main-menu-navbar"
+                aria-controls="main-menu-navbar" aria-expanded="false"
+                aria-label="Меню">
             <span class="navbar-toggler-icon"></span>
         </button>
+
+        <div class="collapse navbar-collapse ml-3" id="main-menu-navbar">
+            <ul class="navbar-nav mr-auto">
+                {% if role=='operator' %}
+                    <li class="nav-item {% if activeTab=='orders' %}active{% endif %}">
+                        <a class="nav-link" href="#">Смена</a>
+                    </li>
+                    <li class="nav-item {% if activeTab=='menu' %}active{% endif %}">
+                        <a class="nav-link" href="#">Меню</a>
+                    </li>
+                    <li class="nav-item {% if activeTab=='archive' %}active{% endif %}">
+                        <a class="nav-link" href="#">Архив заказов</a>
+                    </li>
+                {% elseif role=='admin' %}
+                    <li class="nav-item {% if activeTab=='foodpieces' %}active{% endif %}">
+                        <a class="nav-link" href="#">Блюда</a>
+                    </li>
+                    <li class="nav-item {% if activeTab=='ingredients' %}active{% endif %}">
+                        <a class="nav-link" href="#">Ингредиенты</a>
+                    </li>
+                    <li class="nav-item {% if activeTab=='employees' %}active{% endif %}">
+                        <a class="nav-link" href="#">Работники</a>
+                    </li>
+                {% endif %}
+            </ul>
+        </div>
+
     </nav>
 </div>
