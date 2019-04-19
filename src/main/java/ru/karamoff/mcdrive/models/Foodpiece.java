@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Map;
 
 @Data
@@ -22,11 +23,7 @@ public class Foodpiece {
     private String name;
     private Float cost;
     private Boolean available;
-    private Boolean ready; // null if not in order
 
-    @ElementCollection
-    @MapKeyColumn(name = "ingredient_id")
-    @Column(name = "amount")
-    @CollectionTable(name = "foodpiece_ingredient", joinColumns = @JoinColumn(name = "foodpiece_id"))
-    private Map<Ingredient, Integer> ingredients;
+    @OneToMany(mappedBy = "foodpiece")
+    List<IngredientInFoodpiece> ingredients;
 }

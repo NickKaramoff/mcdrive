@@ -25,9 +25,6 @@ public class Order {
     private Boolean ready;
     private Boolean archived;
 
-    @ManyToMany
-    @JoinTable(name = "order_foodpiece",
-               joinColumns = @JoinColumn(name = "order_id", referencedColumnName = "id"),
-               inverseJoinColumns = @JoinColumn(name = "foodpiece_id", referencedColumnName = "id"))
-    private List<Foodpiece> foodpieces;
+    @OneToMany(mappedBy = "order")
+    List<FoodpieceInOrder> foodpieces;
 }

@@ -22,11 +22,10 @@ public class User {
     private String name;
     private String phone;
     private String email;
+
+    @Column(name = "passhash")
     private String passHash;
 
     @Enumerated(value = EnumType.STRING)
     private Role role;
-
-    @OneToMany(mappedBy = "user")
-    private List<AuthCookie> cookies;
 }
