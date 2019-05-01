@@ -49,8 +49,6 @@ crashlytics.properties
 crashlytics-build.properties
 fabric.properties
 **___jb_tmp___
-modules.xml
-
 ### Linux ###
 *~
 .fuse_hidden*
