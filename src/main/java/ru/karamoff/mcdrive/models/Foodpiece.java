@@ -1,5 +1,6 @@
 package ru.karamoff.mcdrive.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -7,7 +8,6 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.List;
-import java.util.Map;
 
 @Data
 @Builder
@@ -25,5 +25,6 @@ public class Foodpiece {
     private Boolean available;
 
     @OneToMany(mappedBy = "foodpiece")
+    @JsonIgnore
     List<IngredientInFoodpiece> ingredients;
 }
