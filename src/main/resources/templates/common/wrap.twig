@@ -14,11 +14,14 @@
           rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="/css/site.min.css">
 </head>
-<body>
+<body onload="initPage()">
 {% block content %}
 {% endblock %}
 
 {% block scripts %}
+    <script>
+        function initPage() {}
+    </script>
 {% endblock %}
 </body>
 </html>

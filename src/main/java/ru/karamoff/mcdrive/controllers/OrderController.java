@@ -19,17 +19,13 @@ public class OrderController {
     @Autowired
     private OrderRepository orderRepository;
 
-    @GetMapping("/")
-    public String ordersPage(ModelMap map) {
-        List<Order> orders = orderRepository.findAll();
-        map.addAttribute("orders", orders);
-
+    @GetMapping
+    public String ordersPage() {
         return "orders";
     }
 
     /**
      * Получение списка всех заказов в системе в формате JSON
-     * @return
      */
     @GetMapping("/json")
     @ResponseBody
