@@ -5,28 +5,29 @@ $dark-grey: #656565; // menu item
 $light-grey: #c2c2c2; // disabled
 
 .navbar .navbar-brand {
-    font-family: "Yellowtail", cursive;
-    font-weight: 400;
-    font-size: 1.5rem;
+  font-family: "Yellowtail", cursive;
+  font-weight: 400;
+  font-size: 1.5rem;
 }
 
 .btn-outline-secondary {
-    border: 1px solid rgba(0, 0, 0, .125)
+  border: 1px solid rgba(0, 0, 0, .125)
 }
 
 .btn-outline-success {
-    color: $green;
-    border-color: $green;
-    &:hover {
-        color: #fff;
-        background-color: rgba($color: $green, $alpha: 0.75)
-    }
+  color: $green;
+  border-color: $green;
 
-    &:active,
-    &.active {
-        color: #fff;
-        background-color: $green;
-    }
+  &:hover {
+    color: #fff;
+    background-color: rgba($color: $green, $alpha: 0.75)
+  }
+
+  &:active,
+  &.active {
+    color: #fff;
+    background-color: $green;
+  }
 }
 
 /*
@@ -36,94 +37,184 @@ $light-grey: #c2c2c2; // disabled
  */
 
 .hover {
+  transition-property: all;
+  transition-duration: .25s;
+
+  &:hover {
     transition-property: all;
     transition-duration: .25s;
-    &:hover {
-        transition-property: all;
-        transition-duration: .25s;
-    }
-    &.hover-danger:hover {
-        color: #ffffff;
-        background-color: $red;
-    }
-    &.hover-warning:hover {
-        color: #000000;
-        background-color: $yellow;
-    }
-    &.hover-success:hover {
-        background-color: $green;
-        color: #fff;
-    }
+  }
+
+  &.hover-danger:hover {
+    color: #ffffff;
+    background-color: $red;
+  }
+
+  &.hover-warning:hover {
+    color: #000000;
+    background-color: $yellow;
+  }
+
+  &.hover-success:hover {
+    background-color: $green;
+    color: #fff;
+  }
 }
 
 /* Date specifically should be of lighter color */
 
 .card-title#current-date {
-    color: $dark-grey;
+  color: $dark-grey;
 }
 
 .display-4 {
-    font-size: 2.8rem;
+  font-size: 2.8rem;
 }
 
 /* Color of the '#' sign in order number should be lighter */
 
-.display-4>small {
-    color: inherit;
-    opacity: .5;
+.display-4 > small {
+  color: inherit;
+  opacity: .5;
 }
 
 .foodpieceorder .foodpieceorder-modification {
-    list-style-type: disc;
+  list-style-type: disc;
 }
 
 .btn:focus,
 .btn.focus {
-    outline: none !important;
-    box-shadow: none !important;
+  outline: none !important;
+  box-shadow: none !important;
 }
 
 .list-group {
-    .list-group-item {
-        svg {
-            fill: $dark-grey;
-            margin-right: 5px;
-        }
-        &.disabled {
-            color: $light-grey;
-            svg {
-                fill: $light-grey;
-            }
-            &:hover {
-                color: $light-grey;
-            }
-        }
-        &.hover-success:hover {
-            svg {
-                fill: #fff;
-            }
-        }
-        &.hover-danger:hover {
-            svg {
-                fill: #fff;
-            }
-        }
-        &.hover-warning:hover {
-            svg {
-                fill: #000;
-            }
-        }
+  .list-group-item {
+    svg {
+      fill: $dark-grey;
+      margin-right: 5px;
     }
+
+    &.disabled {
+      color: $light-grey;
+
+      svg {
+        fill: $light-grey;
+      }
+
+      &:hover {
+        color: $light-grey;
+      }
+    }
+
+    &.hover-success:hover {
+      svg {
+        fill: #fff;
+      }
+    }
+
+    &.hover-danger:hover {
+      svg {
+        fill: #fff;
+      }
+    }
+
+    &.hover-warning:hover {
+      svg {
+        fill: #000;
+      }
+    }
+  }
 }
 
 .delete-button {
-    text-decoration: none;
-    color: $light-grey;
-    transition: .25s color;
-    margin-right: 10px;
+  text-decoration: none;
+  color: $light-grey;
+  transition: .25s color;
+  margin-right: 10px;
 
-    &:hover {
-        text-decoration: none;
-        color: $red;
-    }
+  &:hover {
+    text-decoration: none;
+    color: $red;
+  }
 }
+
+.lds-grid {
+  display: inline-block;
+  position: relative;
+  width: 64px;
+  height: 64px;
+}
+
+.lds-grid div {
+  position: absolute;
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  background: #ccc;
+  animation: lds-grid 1.2s linear infinite;
+}
+
+.lds-grid div:nth-child(1) {
+  top: 6px;
+  left: 6px;
+  animation-delay: 0s;
+}
+
+.lds-grid div:nth-child(2) {
+  top: 6px;
+  left: 26px;
+  animation-delay: -0.4s;
+}
+
+.lds-grid div:nth-child(3) {
+  top: 6px;
+  left: 45px;
+  animation-delay: -0.8s;
+}
+
+.lds-grid div:nth-child(4) {
+  top: 26px;
+  left: 6px;
+  animation-delay: -0.4s;
+}
+
+.lds-grid div:nth-child(5) {
+  top: 26px;
+  left: 26px;
+  animation-delay: -0.8s;
+}
+
+.lds-grid div:nth-child(6) {
+  top: 26px;
+  left: 45px;
+  animation-delay: -1.2s;
+}
+
+.lds-grid div:nth-child(7) {
+  top: 45px;
+  left: 6px;
+  animation-delay: -0.8s;
+}
+
+.lds-grid div:nth-child(8) {
+  top: 45px;
+  left: 26px;
+  animation-delay: -1.2s;
+}
+
+.lds-grid div:nth-child(9) {
+  top: 45px;
+  left: 45px;
+  animation-delay: -1.6s;
+}
+
+@keyframes lds-grid {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
