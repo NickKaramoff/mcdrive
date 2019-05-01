@@ -5,6 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import ru.karamoff.mcdrive.models.Order;
 import ru.karamoff.mcdrive.repositories.OrderRepository;
@@ -12,12 +13,13 @@ import ru.karamoff.mcdrive.repositories.OrderRepository;
 import java.util.List;
 
 @Controller
+@RequestMapping("/orders")
 public class OrderController {
 
     @Autowired
     private OrderRepository orderRepository;
 
-    @GetMapping("/orders")
+    @GetMapping("/")
     public String ordersPage(ModelMap map) {
         List<Order> orders = orderRepository.findAll();
         map.addAttribute("orders", orders);
@@ -25,7 +27,11 @@ public class OrderController {
         return "orders";
     }
 
-    @GetMapping("/orders/json")
+    /**
+     * Получение списка всех заказов в системе в формате JSON
+     * @return
+     */
+    @GetMapping("/json")
     @ResponseBody
     public ResponseEntity<List<Order>> ordersList() {
         List<Order> orders = orderRepository.findAll();
