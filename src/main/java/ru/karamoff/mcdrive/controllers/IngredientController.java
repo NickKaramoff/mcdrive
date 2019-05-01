@@ -6,24 +6,24 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import ru.karamoff.mcdrive.models.Foodpiece;
-import ru.karamoff.mcdrive.services.FoodpieceService;
+import ru.karamoff.mcdrive.models.Ingredient;
+import ru.karamoff.mcdrive.services.IngredientService;
 
 import java.util.List;
 
 @Controller
-@RequestMapping("/foodpieces")
-public class FoodpieceController {
+@RequestMapping("/ingredients")
+public class IngredientController {
 
     @Autowired
-    private FoodpieceService foodpieceService;
+    private IngredientService ingredientService;
 
     /**
-     * Получение списка всех блюд в системе в формате JSON
+     * Получение списка всех ингредиентов в системе в формате JSON
      */
     @GetMapping("/json")
     @ResponseBody
-    public ResponseEntity<List<Foodpiece>> foodpiecesList() {
-        return ResponseEntity.ok(foodpieceService.getAllFoodpieces());
+    public ResponseEntity<List<Ingredient>> ingredientsList() {
+        return ResponseEntity.ok(ingredientService.getAllIngredients());
     }
 }
