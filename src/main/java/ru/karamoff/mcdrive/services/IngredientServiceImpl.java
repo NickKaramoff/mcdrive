@@ -17,4 +17,9 @@ public class IngredientServiceImpl implements IngredientService {
     public List<Ingredient> getAllIngredients() {
         return ingredientRepository.findAllByOrderByIdAsc();
     }
+
+    @Override
+    public List<Ingredient> getAvailableIngredients() {
+        return ingredientRepository.findAllByAvailableIsTrueOrderByIdAsc();
+    }
 }

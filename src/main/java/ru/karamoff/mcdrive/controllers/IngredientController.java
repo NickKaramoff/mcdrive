@@ -26,4 +26,10 @@ public class IngredientController {
     public ResponseEntity<List<Ingredient>> ingredientsList() {
         return ResponseEntity.ok(ingredientService.getAllIngredients());
     }
+
+    @GetMapping("/available/json")
+    @ResponseBody
+    public ResponseEntity<List<Ingredient>> availableIngredientsList() {
+        return ResponseEntity.ok(ingredientService.getAvailableIngredients());
+    }
 }
