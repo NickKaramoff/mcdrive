@@ -48,7 +48,7 @@
         function initPage() {}
 
         function toggleAvailability(id) {
-            console.log("Toggled for " + id.toString())
+            axios.post("/ingredients/toggle", {"id": id});
         }
 
         function deleteIngredient(id) {

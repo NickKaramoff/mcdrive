@@ -9,5 +9,6 @@ public interface IngredientService {
     List<Ingredient> getAllIngredients();
     List<Ingredient> getAvailableIngredients();
     void saveIngredient(IngredientForm form);
+    void toggleVisibility(IngredientForm form);
     void updateAvailabilityForParents(Long ingredientId);
 }

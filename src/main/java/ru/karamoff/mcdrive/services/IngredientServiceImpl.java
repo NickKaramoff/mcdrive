@@ -39,7 +39,14 @@ public class IngredientServiceImpl implements IngredientService {
                 .name(form.getName())
                 .available(form.getAvailable())
                 .build();
-        ingredient = ingredientRepository.save(ingredient);
+        ingredientRepository.save(ingredient);
+    }
+
+    @Override
+    public void toggleVisibility(IngredientForm form) {
+        Ingredient ingredient = ingredientRepository.getOne(form.getId());
+        ingredient.setAvailable(!ingredient.getAvailable());
+        ingredientRepository.saveAndFlush(ingredient);
         updateAvailabilityForParents(ingredient.getId());
     }
 

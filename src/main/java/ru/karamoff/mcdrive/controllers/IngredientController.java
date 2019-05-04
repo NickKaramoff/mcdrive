@@ -4,10 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import ru.karamoff.mcdrive.forms.IngredientForm;
 import ru.karamoff.mcdrive.models.Ingredient;
 import ru.karamoff.mcdrive.services.IngredientService;
@@ -47,5 +44,11 @@ public class IngredientController {
     public String saveIngredient(IngredientForm ingredientForm) {
         ingredientService.saveIngredient(ingredientForm);
         return "redirect:/ingredients";
+    }
+
+    @PostMapping(value = "/toggle", consumes = "application/json")
+    public ResponseEntity<String> toggleAvailability(@RequestBody IngredientForm form) {
+        ingredientService.toggleVisibility(form);
+        return ResponseEntity.ok("OK");
     }
 }
