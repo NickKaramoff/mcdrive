@@ -52,7 +52,11 @@
         }
 
         function deleteIngredient(id) {
-            console.log("Deleting " + id.toString())
+            axios.delete(
+                "/ingredients/remove",
+                {headers: {"Content-Type": "application/json"},
+                data: {"id": id}}
+                    ).then(()=>window.location.reload());
         }
     </script>
 {% endblock %}

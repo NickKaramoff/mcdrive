@@ -43,11 +43,16 @@ public class IngredientServiceImpl implements IngredientService {
     }
 
     @Override
-    public void toggleVisibility(IngredientForm form) {
-        Ingredient ingredient = ingredientRepository.getOne(form.getId());
+    public void toggleVisibility(Long ingredientId) {
+        Ingredient ingredient = ingredientRepository.getOne(ingredientId);
         ingredient.setAvailable(!ingredient.getAvailable());
         ingredientRepository.saveAndFlush(ingredient);
         updateAvailabilityForParents(ingredient.getId());
+    }
+
+    @Override
+    public void removeIngredient(Long ingredientId) {
+        ingredientRepository.deleteById(ingredientId);
     }
 
 

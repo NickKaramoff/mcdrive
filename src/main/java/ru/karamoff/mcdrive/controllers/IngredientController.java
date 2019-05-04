@@ -48,7 +48,13 @@ public class IngredientController {
 
     @PostMapping(value = "/toggle", consumes = "application/json")
     public ResponseEntity<String> toggleAvailability(@RequestBody IngredientForm form) {
-        ingredientService.toggleVisibility(form);
+        ingredientService.toggleVisibility(form.getId());
+        return ResponseEntity.ok("OK");
+    }
+
+    @DeleteMapping(value = "/remove", consumes = "application/json")
+    public ResponseEntity<String> removeIngredient(@RequestBody IngredientForm form) {
+        ingredientService.removeIngredient(form.getId());
         return ResponseEntity.ok("OK");
     }
 }
