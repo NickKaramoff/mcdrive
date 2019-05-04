@@ -3,6 +3,7 @@ package ru.karamoff.mcdrive.controllers;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,6 +20,13 @@ public class IngredientController {
 
     @Autowired
     private IngredientService ingredientService;
+
+    @GetMapping
+    public String ingredientsListPage(ModelMap map) {
+        List<Ingredient> ingredients = ingredientService.getAllIngredients();
+        map.addAttribute("ingredients", ingredients);
+        return "ingredients_list";
+    }
 
     /**
      * Получение списка всех ингредиентов в системе в формате JSON
@@ -38,6 +46,6 @@ public class IngredientController {
     @PostMapping("/save")
     public String saveIngredient(IngredientForm ingredientForm) {
         ingredientService.saveIngredient(ingredientForm);
-        return "redirect:/";
+        return "redirect:/ingredients";
     }
 }
