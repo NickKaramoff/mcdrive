@@ -9,6 +9,7 @@ import ru.karamoff.mcdrive.repositories.IngredientInFoodpieceRepository;
 import ru.karamoff.mcdrive.repositories.IngredientRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class IngredientServiceImpl implements IngredientService {
@@ -37,7 +38,7 @@ public class IngredientServiceImpl implements IngredientService {
         Ingredient ingredient = Ingredient.builder()
                 .id(form.getId())
                 .name(form.getName())
-                .available(form.getAvailable())
+                .available(Optional.ofNullable(form.getAvailable()).orElse(false))
                 .build();
         ingredientRepository.save(ingredient);
     }

@@ -25,6 +25,17 @@ public class IngredientController {
         return "ingredients_list";
     }
 
+    @GetMapping("/new")
+    public String ingredientAddPage() {
+        return "ingredient_new";
+    }
+
+    @PostMapping("/new")
+    public String ingredientAddForm(IngredientForm form) {
+        ingredientService.saveIngredient(form);
+        return "redirect:/ingredients";
+    }
+
     /**
      * Получение списка всех ингредиентов в системе в формате JSON
      */

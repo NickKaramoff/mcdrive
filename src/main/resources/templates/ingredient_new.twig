@@ -1,0 +1,45 @@
+{% extends "common/wrap.twig" %}
+
+{% block title %}Новый ингредиент{% endblock %}
+
+{% block content %}
+    {% include "partials/header.twig" with {activeTab: 'ingredients', role: 'admin'} %}
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 col-lg-9 mb-3 p-3">
+                <h3 class="mb-3">Создать новый ингредиент</h3>
+                <form method="POST">
+                    <div class="row">
+                        <div class="col-lg-5 col-md-6">
+                            <div class="form-group">
+                                <label for="foodpiece-name">Название</label>
+                                <input type="text"
+                                       class="form-control"
+                                       id="foodpiece-name"
+                                       name="name"
+                                       placeholder="Котлета"
+                                       required>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="custom-control custom-checkbox mb-4">
+                        <input type="checkbox"
+                               class="custom-control-input"
+                               id="foodpiece-available"
+                               name="available">
+                        <label class="custom-control-label"
+                               for="foodpiece-available">
+                            Есть сейчас в наличии?
+                        </label>
+                    </div>
+                    <button type="submit" class="btn btn-success">Сохранить
+                    </button>
+                </form>
+            </div>
+            {% include 'partials/sidebar.twig' %}
+        </div>
+    </div>
+{% endblock %}
