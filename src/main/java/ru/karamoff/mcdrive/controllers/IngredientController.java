@@ -5,6 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
+import ru.karamoff.mcdrive.forms.IdForm;
 import ru.karamoff.mcdrive.forms.IngredientForm;
 import ru.karamoff.mcdrive.models.Ingredient;
 import ru.karamoff.mcdrive.services.IngredientService;
@@ -58,13 +59,13 @@ public class IngredientController {
     }
 
     @PostMapping(value = "/toggle", consumes = "application/json")
-    public ResponseEntity<String> toggleAvailability(@RequestBody IngredientForm form) {
+    public ResponseEntity<String> toggleAvailability(@RequestBody IdForm form) {
         ingredientService.toggleVisibility(form.getId());
         return ResponseEntity.ok("OK");
     }
 
     @DeleteMapping(value = "/remove", consumes = "application/json")
-    public ResponseEntity<String> removeIngredient(@RequestBody IngredientForm form) {
+    public ResponseEntity<String> removeIngredient(@RequestBody IdForm form) {
         ingredientService.removeIngredient(form.getId());
         return ResponseEntity.ok("OK");
     }

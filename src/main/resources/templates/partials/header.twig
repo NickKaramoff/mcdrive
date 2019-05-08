@@ -15,23 +15,23 @@
             <ul class="navbar-nav mr-auto">
                 {% if role=='operator' %}
                     <li class="nav-item {% if activeTab=='orders' %}active{% endif %}">
-                        <a class="nav-link" href="#">Смена</a>
+                        <a class="nav-link" href="/orders">Смена</a>
                     </li>
-                    <li class="nav-item {% if activeTab=='menu' %}active{% endif %}">
-                        <a class="nav-link" href="#">Меню</a>
+                    <li class="nav-item {% if activeTab=='foodpieces' %}active{% endif %}">
+                        <a class="nav-link" href="/foodpieces">Меню</a>
                     </li>
                     <li class="nav-item {% if activeTab=='archive' %}active{% endif %}">
-                        <a class="nav-link" href="#">Архив заказов</a>
+                        <a class="nav-link" href="/archive">Архив заказов</a>
                     </li>
                 {% elseif role=='admin' %}
                     <li class="nav-item {% if activeTab=='foodpieces' %}active{% endif %}">
-                        <a class="nav-link" href="#">Блюда</a>
+                        <a class="nav-link" href="/foodpieces">Блюда</a>
                     </li>
                     <li class="nav-item {% if activeTab=='ingredients' %}active{% endif %}">
-                        <a class="nav-link" href="#">Ингредиенты</a>
+                        <a class="nav-link" href="/ingredients">Ингредиенты</a>
                     </li>
                     <li class="nav-item {% if activeTab=='employees' %}active{% endif %}">
-                        <a class="nav-link" href="#">Работники</a>
+                        <a class="nav-link" href="/employees">Работники</a>
                     </li>
                 {% endif %}
             </ul>

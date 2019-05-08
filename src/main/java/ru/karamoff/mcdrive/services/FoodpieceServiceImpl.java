@@ -32,4 +32,9 @@ public class FoodpieceServiceImpl implements FoodpieceService {
         foodpiece.setAvailable(available);
         foodpieceRepository.save(foodpiece);
     }
+
+    @Override
+    public void removeFoodpiece(Long foodpieceId) {
+        foodpieceRepository.deleteById(foodpieceId);
+    }
 }
