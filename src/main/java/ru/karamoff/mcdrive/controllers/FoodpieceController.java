@@ -7,15 +7,12 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import ru.karamoff.mcdrive.forms.FoodpieceForm;
 import ru.karamoff.mcdrive.forms.IdForm;
-import ru.karamoff.mcdrive.forms.IngredientForm;
 import ru.karamoff.mcdrive.models.Foodpiece;
 import ru.karamoff.mcdrive.models.Ingredient;
 import ru.karamoff.mcdrive.services.FoodpieceService;
 import ru.karamoff.mcdrive.services.IngredientService;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.List;
-import java.util.Optional;
 
 @Controller
 @RequestMapping("/foodpieces")
