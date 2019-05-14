@@ -25,7 +25,7 @@ public class FoodpieceController {
     private IngredientService ingredientService;
 
     @GetMapping
-    public String foodpiecesPage(ModelMap map) {
+    public String foodpiecesListPage(ModelMap map) {
         List<Foodpiece> foodpieces = foodpieceService.getAllFoodpieces();
         map.addAttribute("foodpieces", foodpieces);
         return "foodpieces_list";
@@ -39,22 +39,13 @@ public class FoodpieceController {
     }
 
     @PostMapping("/new")
-    public String createNewFoodpiece(FoodpieceForm form) {
+    public String createFoodpiece(FoodpieceForm form) {
         foodpieceService.createFoodpiece(form);
         return "redirect:/foodpieces";
     }
 
-    /**
-     * Получение списка всех блюд в системе в формате JSON
-     */
-    @GetMapping("/json")
-    @ResponseBody
-    public ResponseEntity<List<Foodpiece>> foodpiecesList() {
-        return ResponseEntity.ok(foodpieceService.getAllFoodpieces());
-    }
-
     @DeleteMapping(value = "/remove", consumes = "application/json")
-    public ResponseEntity<String> removeIngredient(@RequestBody IdForm form) {
+    public ResponseEntity<String> deleteFoodpiece(@RequestBody IdForm form) {
         foodpieceService.removeFoodpiece(form.getId());
         return ResponseEntity.ok("OK");
     }

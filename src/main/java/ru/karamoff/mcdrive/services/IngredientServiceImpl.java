@@ -29,11 +29,6 @@ public class IngredientServiceImpl implements IngredientService {
     }
 
     @Override
-    public List<Ingredient> getAvailableIngredients() {
-        return ingredientRepository.findAllByAvailableIsTrueOrderByIdAsc();
-    }
-
-    @Override
     public Ingredient getIngredient(Long ingredientId) {
         return ingredientRepository.getOne(ingredientId);
     }
@@ -49,7 +44,7 @@ public class IngredientServiceImpl implements IngredientService {
     }
 
     @Override
-    public void toggleVisibility(Long ingredientId) {
+    public void toggleAvailability(Long ingredientId) {
         Ingredient ingredient = ingredientRepository.getOne(ingredientId);
         ingredient.setAvailable(!ingredient.getAvailable());
         ingredientRepository.saveAndFlush(ingredient);

@@ -27,45 +27,24 @@ public class IngredientController {
     }
 
     @GetMapping("/new")
-    public String ingredientAddPage() {
+    public String newIngredientPage() {
         return "ingredient_new";
     }
 
     @PostMapping("/new")
-    public String ingredientAddForm(IngredientForm form) {
+    public String createIngredient(IngredientForm form) {
         ingredientService.saveIngredient(form);
         return "redirect:/ingredients";
     }
 
-    /**
-     * Получение списка всех ингредиентов в системе в формате JSON
-     */
-    @GetMapping("/json")
-    @ResponseBody
-    public ResponseEntity<List<Ingredient>> ingredientsList() {
-        return ResponseEntity.ok(ingredientService.getAllIngredients());
-    }
-
-    @GetMapping("/available/json")
-    @ResponseBody
-    public ResponseEntity<List<Ingredient>> availableIngredientsList() {
-        return ResponseEntity.ok(ingredientService.getAvailableIngredients());
-    }
-
-    @PostMapping("/save")
-    public String saveIngredient(IngredientForm ingredientForm) {
-        ingredientService.saveIngredient(ingredientForm);
-        return "redirect:/ingredients";
-    }
-
     @PostMapping(value = "/toggle", consumes = "application/json")
-    public ResponseEntity<String> toggleAvailability(@RequestBody IdForm form) {
-        ingredientService.toggleVisibility(form.getId());
+    public ResponseEntity<String> toggleIngredientAvailability(@RequestBody IdForm form) {
+        ingredientService.toggleAvailability(form.getId());
         return ResponseEntity.ok("OK");
     }
 
     @DeleteMapping(value = "/remove", consumes = "application/json")
-    public ResponseEntity<String> removeIngredient(@RequestBody IdForm form) {
+    public ResponseEntity<String> deleteIngredient(@RequestBody IdForm form) {
         ingredientService.removeIngredient(form.getId());
         return ResponseEntity.ok("OK");
     }

@@ -7,10 +7,9 @@ import java.util.List;
 
 public interface IngredientService {
     List<Ingredient> getAllIngredients();
-    List<Ingredient> getAvailableIngredients();
     Ingredient getIngredient(Long ingredientId);
     void saveIngredient(IngredientForm form);
-    void toggleVisibility(Long ingredientId);
+    void toggleAvailability(Long ingredientId);
     void removeIngredient(Long ingredientId);
     void updateAvailabilityForParents(Long ingredientId);
 }
