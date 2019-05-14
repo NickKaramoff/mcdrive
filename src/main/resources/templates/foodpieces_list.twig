@@ -1,6 +1,6 @@
 {% extends "common/wrap.twig" %}
 
-{% block title %}Ингредиенты{% endblock %}
+{% block title %}Блюда{% endblock %}
 
 {% block content %}
     {% include "partials/header.twig" with {activeTab: 'foodpieces', role: 'admin'} %}
@@ -26,7 +26,7 @@
                                 </h3>
                                 <div>
                                     <h4>{{ foodpiece.cost }}&nbsp;₽</h4>
-                                    {% if not foodpiece.available %}не {% endif %}
+                                    {% if foodpiece.available == false %}не {% endif %}
                                     доступен
                                 </div>
                             </div>

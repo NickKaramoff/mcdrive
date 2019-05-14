@@ -34,6 +34,11 @@ public class IngredientServiceImpl implements IngredientService {
     }
 
     @Override
+    public Ingredient getIngredient(Long ingredientId) {
+        return ingredientRepository.getOne(ingredientId);
+    }
+
+    @Override
     public void saveIngredient(IngredientForm form) {
         Ingredient ingredient = Ingredient.builder()
                 .id(form.getId())

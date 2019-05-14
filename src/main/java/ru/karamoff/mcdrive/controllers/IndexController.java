@@ -16,7 +16,7 @@ public class IndexController {
         if ("operator".equals(role)) {
             return "redirect:/orders";
         } else if ("admin".equals(role)) {
-            return "redirect:/ingredients";
+            return "redirect:/foodpieces";
         } else {
             //TODO: replace with 500 code
             return null;
