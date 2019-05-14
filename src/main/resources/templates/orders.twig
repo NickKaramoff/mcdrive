@@ -41,7 +41,7 @@
             for (const order of orders) {
                 let ready = true;
 
-                html += `<div class="list-group-item flex-column align-items-start order">
+                html += `<div class="list-group-item flex-column align-items-start order" id="order-${order.id}">
                         <div class="d-flex w-100 justify-content-between mb-3">
                             <h3 class="display-4 m-0">
                                 <small>#</small>
@@ -82,7 +82,7 @@
                             <label id="ready-${order.id}" class="btn btn-lg btn-outline-success ${ready?'':'disabled'} ${order.ready?'active':''}" onclick="toggleOrder(${order.id})">
                                 <input type="checkbox" autocomplete="off"> Готов
                             </label>
-                            <label id="archive-${order.id}" class="btn btn-lg btn-outline-success ${order.ready?'':'disabled'} ${order.archived?'active':''}">
+                            <label id="archive-${order.id}" class="btn btn-lg btn-outline-success ${order.ready?'':'disabled'} ${order.archived?'active':''}" onclick="archiveOrder(${order.id})">
                                 <input type="checkbox" autocomplete="off"> Выдан
                             </label>
                         </div>
@@ -118,7 +118,7 @@
 
         function toggleOrder(orderId) {
             axios.post(
-                'orders/toggleorder',
+                '/orders/toggleorder',
                 {"id": orderId}
             ).then(function (resp) {
                 let archiveButton = document.getElementById(`archive-${orderId}`);
@@ -127,6 +127,16 @@
                 } else {
                     archiveButton.classList.add('disabled');
                 }
+            }).catch(function (e) {console.log(e)});
+        }
+
+        function archiveOrder(orderId) {
+            axios.post(
+                '/orders/archive',
+                {"id": orderId}
+            ).then(function () {
+                let orderDiv = document.getElementById(`order-${orderId}`);
+                orderDiv.parentNode.removeChild(orderDiv);
             }).catch(function (e) {console.log(e)});
         }
 

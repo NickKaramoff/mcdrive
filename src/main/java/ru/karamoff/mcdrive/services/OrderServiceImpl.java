@@ -26,7 +26,7 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public List<Order> getComposedOrders() {
-        return orderRepository.findAllByTimeIsNotNull();
+        return orderRepository.findAllByArchivedIsFalseOrderByIdDesc();
     }
 
     @Override
@@ -87,5 +87,12 @@ public class OrderServiceImpl implements OrderService {
         order.setReady(ready);
         orderRepository.save(order);
         return ready;
+    }
+
+    @Override
+    public void archiveOrder(Long orderId) {
+        Order order = orderRepository.getOne(orderId);
+        order.setArchived(true);
+        orderRepository.save(order);
     }
 }

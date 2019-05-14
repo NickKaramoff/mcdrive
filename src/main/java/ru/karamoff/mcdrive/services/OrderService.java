@@ -11,4 +11,5 @@ public interface OrderService {
     boolean toggleFoodpieceInOrder(Long foodpieceInOrderId);
     boolean toggleOrder(Long orderId);
     boolean updateOrderReadiness(Order order);
+    void archiveOrder(Long orderId);
 }

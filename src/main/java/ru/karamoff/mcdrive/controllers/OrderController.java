@@ -69,6 +69,13 @@ public class OrderController {
         return ResponseEntity.ok(new OrderReady(canBeArchived));
     }
 
+    @PostMapping(value = "/archive", consumes = "application/json")
+    @ResponseBody
+    public ResponseEntity<String> archiveOrder(@RequestBody IdForm form) {
+        orderService.archiveOrder(form.getId());
+        return ResponseEntity.ok("OK");
+    }
+
     @Data
     @AllArgsConstructor
     @NoArgsConstructor

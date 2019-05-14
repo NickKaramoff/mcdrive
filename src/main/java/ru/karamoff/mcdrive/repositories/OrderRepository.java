@@ -6,5 +6,5 @@ import ru.karamoff.mcdrive.models.Order;
 import java.util.List;
 
 public interface OrderRepository extends JpaRepository<Order, Long> {
-    List<Order> findAllByTimeIsNotNull();
+    List<Order> findAllByArchivedIsFalseOrderByIdDesc();
 }
