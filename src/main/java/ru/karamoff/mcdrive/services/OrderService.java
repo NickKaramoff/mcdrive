@@ -9,5 +9,6 @@ public interface OrderService {
     List<Order> getComposedOrders();
     void createOrder(OrderForm orderForm);
     boolean toggleFoodpieceInOrder(Long foodpieceInOrderId);
-    boolean isOrderReady(Order order);
+    boolean toggleOrder(Long orderId);
+    boolean updateOrderReadiness(Order order);
 }

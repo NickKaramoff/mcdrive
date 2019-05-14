@@ -64,11 +64,19 @@ public class OrderServiceImpl implements OrderService {
         FoodpieceInOrder fio = foodpieceInOrderRepository.getOne(foodpieceInOrderId);
         fio.setReady(!fio.getReady());
         foodpieceInOrderRepository.saveAndFlush(fio);
-        return isOrderReady(fio.getOrder());
+        return updateOrderReadiness(fio.getOrder());
     }
 
     @Override
-    public boolean isOrderReady(Order order) {
+    public boolean toggleOrder(Long orderId) {
+        Order order = orderRepository.getOne(orderId);
+        order.setReady(!order.getReady());
+        orderRepository.saveAndFlush(order);
+        return order.getReady();
+    }
+
+    @Override
+    public boolean updateOrderReadiness(Order order) {
         boolean ready = true;
         for (FoodpieceInOrder fio : order.getFoodpieces()) {
             if (!fio.getReady()) {
@@ -76,6 +84,8 @@ public class OrderServiceImpl implements OrderService {
                 break;
             }
         }
+        order.setReady(ready);
+        orderRepository.save(order);
         return ready;
     }
 }

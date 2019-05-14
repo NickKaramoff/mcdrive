@@ -62,6 +62,13 @@ public class OrderController {
         return ResponseEntity.ok(new OrderReady(isOrderReady));
     }
 
+    @PostMapping(value = "/toggleorder", consumes = "application/json")
+    @ResponseBody
+    public ResponseEntity<OrderReady> toggleOrder(@RequestBody IdForm form) {
+        boolean canBeArchived = orderService.toggleOrder(form.getId());
+        return ResponseEntity.ok(new OrderReady(canBeArchived));
+    }
+
     @Data
     @AllArgsConstructor
     @NoArgsConstructor

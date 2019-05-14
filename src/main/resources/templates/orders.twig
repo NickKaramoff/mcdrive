@@ -79,7 +79,7 @@
                 html += `</ul>
                         <div class="btn-group btn-group-toggle d-flex justify-content-end"
                              data-toggle="buttons" role="group">
-                            <label id="ready-${order.id}" class="btn btn-lg btn-outline-success ${ready?'':'disabled'} ${order.ready?'active':''}">
+                            <label id="ready-${order.id}" class="btn btn-lg btn-outline-success ${ready?'':'disabled'} ${order.ready?'active':''}" onclick="toggleOrder(${order.id})">
                                 <input type="checkbox" autocomplete="off"> Готов
                             </label>
                             <label id="archive-${order.id}" class="btn btn-lg btn-outline-success ${order.ready?'':'disabled'} ${order.archived?'active':''}">
@@ -111,6 +111,21 @@
                     readyButton.classList.remove('disabled');
                 } else {
                     readyButton.classList.add('disabled');
+                    readyButton.classList.remove('active');
+                }
+            }).catch(function (e) {console.log(e)});
+        }
+
+        function toggleOrder(orderId) {
+            axios.post(
+                'orders/toggleorder',
+                {"id": orderId}
+            ).then(function (resp) {
+                let archiveButton = document.getElementById(`archive-${orderId}`);
+                if (resp.data.ready) {
+                    archiveButton.classList.remove('disabled');
+                } else {
+                    archiveButton.classList.add('disabled');
                 }
             }).catch(function (e) {console.log(e)});
         }
