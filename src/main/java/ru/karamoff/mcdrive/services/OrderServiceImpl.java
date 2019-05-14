@@ -45,16 +45,37 @@ public class OrderServiceImpl implements OrderService {
                 .filter(entry -> entry.getValue() != 0)
                 .forEach(entry -> {
                     Foodpiece foodpiece = foodpieceService.getFoodpiece(entry.getKey());
-                    sum[0] += foodpiece.getCost()*entry.getValue();
+                    sum[0] += foodpiece.getCost() * entry.getValue();
                     FoodpieceInOrder fio = FoodpieceInOrder.builder()
                             .foodpiece(foodpiece)
                             .order(finalOrder)
                             .amount(entry.getValue())
+                            .ready(false)
                             .build();
                     foodpieceInOrderRepository.save(fio);
                 });
         foodpieceInOrderRepository.flush();
         finalOrder.setSum(sum[0]);
         orderRepository.save(finalOrder);
+    }
+
+    @Override
+    public boolean toggleFoodpieceInOrder(Long foodpieceInOrderId) {
+        FoodpieceInOrder fio = foodpieceInOrderRepository.getOne(foodpieceInOrderId);
+        fio.setReady(!fio.getReady());
+        foodpieceInOrderRepository.saveAndFlush(fio);
+        return isOrderReady(fio.getOrder());
+    }
+
+    @Override
+    public boolean isOrderReady(Order order) {
+        boolean ready = true;
+        for (FoodpieceInOrder fio : order.getFoodpieces()) {
+            if (!fio.getReady()) {
+                ready = false;
+                break;
+            }
+        }
+        return ready;
     }
 }

@@ -11,5 +11,4 @@ public interface IngredientService {
     void saveIngredient(IngredientForm form);
     void toggleAvailability(Long ingredientId);
     void removeIngredient(Long ingredientId);
-    void updateAvailabilityForParents(Long ingredientId);
 }

@@ -1,7 +1,6 @@
 package ru.karamoff.mcdrive.models;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonUnwrapped;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -17,7 +16,6 @@ import javax.persistence.*;
 @Entity
 @Table(name = "order_foodpiece")
 public class FoodpieceInOrder {
-    @JsonIgnore
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -27,7 +25,7 @@ public class FoodpieceInOrder {
     @JoinColumn(name = "order_id", referencedColumnName = "id")
     private Order order;
 
-    @JsonUnwrapped
+    @JsonUnwrapped(prefix = "fp")
     @ManyToOne
     @JoinColumn(name = "foodpiece_id", referencedColumnName = "id")
     private Foodpiece foodpiece;

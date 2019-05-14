@@ -1,0 +1,7 @@
+POST http://localhost:8080/orders/togglefp
+Content-Type: application/json;charset=UTF-8
+Origin: http://localhost:8080
+
+{"id": 3}
+
+###

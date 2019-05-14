@@ -2,6 +2,14 @@
 
 {% block title %}Заказы{% endblock %}
 
+{% block head %}
+    <style>
+        .disabled {
+            pointer-events: none;
+        }
+    </style>
+{% endblock %}
+
 {% block content %}
     {% include "partials/header.twig" with {activeTab: 'orders', role: 'operator'} %}
 
@@ -23,6 +31,8 @@
 
 {% block scripts %}
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 
     <script>
         function mapOrders(orders) {
@@ -48,11 +58,11 @@
                 for (const foodpiece of order.foodpieces) {
                     html += `<li class="list-group-item d-flex justify-content-between align-items-center">
                                 <div class="foodpieceorder">
-                                    <p class="lead mb-0">${foodpiece.amount}&nbsp;&times;&nbsp;${foodpiece.name}</p>
+                                    <p class="lead mb-0">${foodpiece.amount}&nbsp;&times;&nbsp;${foodpiece.fpname}</p>
                                 </div>
                                 <div class="btn-group-toggle"
                                      data-toggle="buttons">
-                                    <label class="btn btn-outline-success ${foodpiece.ready?'active':''}">
+                                    <label class="btn btn-outline-success ${foodpiece.ready?'active':''}" onclick="toggleFoodpiece(${foodpiece.id}, ${order.id})">
                                         <input type="checkbox"
                                                autocomplete="off"
                                                >
@@ -69,10 +79,10 @@
                 html += `</ul>
                         <div class="btn-group btn-group-toggle d-flex justify-content-end"
                              data-toggle="buttons" role="group">
-                            <label class="btn btn-lg btn-outline-success ${ready?'':'disabled'} ${order.ready?'active':''}">
+                            <label id="ready-${order.id}" class="btn btn-lg btn-outline-success ${ready?'':'disabled'} ${order.ready?'active':''}">
                                 <input type="checkbox" autocomplete="off"> Готов
                             </label>
-                            <label class="btn btn-lg btn-outline-success ${order.ready?'':'disabled'} ${order.archived?'active':''}">
+                            <label id="archive-${order.id}" class="btn btn-lg btn-outline-success ${order.ready?'':'disabled'} ${order.archived?'active':''}">
                                 <input type="checkbox" autocomplete="off"> Выдан
                             </label>
                         </div>
@@ -89,6 +99,20 @@
                     document.getElementById('orders-container').innerHTML = mapOrders(resp.data);
                 })
                 .catch(function (e) { console.log(e)});
+        }
+
+        function toggleFoodpiece(foodpieceId, orderId) {
+            axios.post(
+                '/orders/togglefp',
+                {"id": foodpieceId}
+            ).then(function (resp) {
+                let readyButton = document.getElementById(`ready-${orderId}`);
+                if (resp.data.ready) {
+                    readyButton.classList.remove('disabled');
+                } else {
+                    readyButton.classList.add('disabled');
+                }
+            }).catch(function (e) {console.log(e)});
         }
 
         function initPage() {

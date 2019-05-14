@@ -57,8 +57,7 @@ public class IngredientServiceImpl implements IngredientService {
     }
 
 
-    @Override
-    public void updateAvailabilityForParents(Long ingredientId) {
+    private void updateAvailabilityForParents(Long ingredientId) {
         List<IngredientInFoodpiece> ingredientInFoodpieces = ingredientInFoodpieceRepository.findAllByIngredient_Id(ingredientId);
         for (IngredientInFoodpiece iif : ingredientInFoodpieces) {
             foodpieceService.updateAvailability(iif.getFoodpiece().getId());

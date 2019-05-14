@@ -8,4 +8,6 @@ import java.util.List;
 public interface OrderService {
     List<Order> getComposedOrders();
     void createOrder(OrderForm orderForm);
+    boolean toggleFoodpieceInOrder(Long foodpieceInOrderId);
+    boolean isOrderReady(Order order);
 }
