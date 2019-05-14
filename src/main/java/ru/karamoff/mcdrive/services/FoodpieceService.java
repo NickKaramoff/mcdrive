@@ -10,5 +10,8 @@ public interface FoodpieceService {
     void updateAvailability(Long foodpieceId);
     void removeFoodpiece(Long foodpieceId);
 
+    Foodpiece getFoodpiece(Long foodpieceId);
+
+    List<Foodpiece> getAvailableFoodpieces();
     List<Foodpiece> getAllFoodpieces();
 }

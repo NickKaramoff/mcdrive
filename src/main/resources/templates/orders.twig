@@ -8,7 +8,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-8 col-lg-9 mb-3">
-                <a href="" type="button"
+                <a href="/orders/new" type="button"
                    class="btn btn-outline-secondary btn-lg btn-block mb-3">
                     Новый заказ
                 </a>
@@ -37,14 +37,18 @@
                                 <small>#</small>
                                 ${order.id % 1000}
                             </h3>
-                            <p class="lead text-muted">${(new Date(order.time+"+00:00")).toLocaleTimeString()}</p>
+                            <p class="lead text-muted">
+                                ${(new Date(order.time+"+00:00")).toLocaleTimeString()}
+                                <br>
+                                ${parseFloat(order.sum).toLocaleString('ru-RU',{style: 'currency', currency: 'RUB', minimumFractionDigits: 0})}
+                            </p>
                         </div>
                         <ul class="list-group list-group-flush mb-4">`;
 
                 for (const foodpiece of order.foodpieces) {
                     html += `<li class="list-group-item d-flex justify-content-between align-items-center">
                                 <div class="foodpieceorder">
-                                    <p class="lead mb-0">${foodpiece.name}</p>
+                                    <p class="lead mb-0">${foodpiece.amount}&nbsp;&times;&nbsp;${foodpiece.name}</p>
                                 </div>
                                 <div class="btn-group-toggle"
                                      data-toggle="buttons">

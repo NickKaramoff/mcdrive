@@ -7,5 +7,4 @@ import java.util.List;
 
 public interface IngredientRepository extends JpaRepository<Ingredient, Long> {
     List<Ingredient> findAllByOrderByAvailableDescIdAsc();
-    List<Ingredient> findAllByAvailableIsTrueOrderByIdAsc();
 }

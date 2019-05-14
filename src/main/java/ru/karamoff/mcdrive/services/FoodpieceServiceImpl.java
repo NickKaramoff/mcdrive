@@ -48,7 +48,7 @@ public class FoodpieceServiceImpl implements FoodpieceService {
                 .name(foodpieceForm.getName())
                 .cost(foodpieceForm.getCost())
                 .build();
-        Foodpiece finalFoodpiece = foodpieceRepository.save(foodpiece);
+        final Foodpiece finalFoodpiece = foodpieceRepository.save(foodpiece);
         final boolean[] available = {true};
 
         foodpieceForm.getIngredients()
@@ -65,8 +65,9 @@ public class FoodpieceServiceImpl implements FoodpieceService {
                             .foodpiece(finalFoodpiece)
                             .amount(entry.getValue())
                             .build();
-                    ingredientInFoodpieceRepository.saveAndFlush(iif);
+                    ingredientInFoodpieceRepository.save(iif);
                 });
+        ingredientInFoodpieceRepository.flush();
         finalFoodpiece.setAvailable(available[0]);
         foodpieceRepository.save(finalFoodpiece);
     }
@@ -74,5 +75,15 @@ public class FoodpieceServiceImpl implements FoodpieceService {
     @Override
     public void removeFoodpiece(Long foodpieceId) {
         foodpieceRepository.deleteById(foodpieceId);
+    }
+
+    @Override
+    public Foodpiece getFoodpiece(Long foodpieceId) {
+        return foodpieceRepository.getOne(foodpieceId);
+    }
+
+    @Override
+    public List<Foodpiece> getAvailableFoodpieces() {
+        return foodpieceRepository.findAllByAvailableIsTrueOrderByIdAsc();
     }
 }

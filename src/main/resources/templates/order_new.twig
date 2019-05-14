@@ -1,0 +1,42 @@
+{% extends "common/wrap.twig" %}
+
+{% block title %}Новый заказ{% endblock %}
+
+{% block content %}
+    {% include "partials/header.twig" with {activeTab: 'orders', role: 'operator'} %}
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 col-lg-9 mb-3 p-3">
+                <h3 class="mb-3">Оформить заказ</h3>
+                <form method="POST">
+                    <div class="row">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th scope="col">Блюдо</th>
+                                <th scope="col">Количество</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for foodpiece in foodpieces %}
+                                <tr>
+                                    <th scope="row">{{ foodpiece.name }}</th>
+                                    <td>
+                                        <input type="number"
+                                               class="form-control"
+                                               placeholder="Количество"
+                                               value="0"
+                                               name="foodpieces[{{ foodpiece.id }}]"></td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                    <button type="submit" class="btn btn-success">Завершить</button>
+                </form>
+            </div>
+            {% include 'partials/sidebar.twig' %}
+        </div>
+    </div>
+{% endblock %}

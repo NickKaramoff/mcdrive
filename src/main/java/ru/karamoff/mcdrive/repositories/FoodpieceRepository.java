@@ -7,4 +7,5 @@ import java.util.List;
 
 public interface FoodpieceRepository extends JpaRepository<Foodpiece, Long> {
     List<Foodpiece> findAllByOrderByIdAsc();
+    List<Foodpiece> findAllByAvailableIsTrueOrderByIdAsc();
 }

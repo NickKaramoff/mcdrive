@@ -2,11 +2,14 @@ package ru.karamoff.mcdrive.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import ru.karamoff.mcdrive.forms.OrderForm;
+import ru.karamoff.mcdrive.models.Foodpiece;
+import ru.karamoff.mcdrive.models.FoodpieceInOrder;
 import ru.karamoff.mcdrive.models.Order;
 import ru.karamoff.mcdrive.repositories.FoodpieceInOrderRepository;
-import ru.karamoff.mcdrive.repositories.FoodpieceRepository;
 import ru.karamoff.mcdrive.repositories.OrderRepository;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -16,7 +19,7 @@ public class OrderServiceImpl implements OrderService {
     private OrderRepository orderRepository;
 
     @Autowired
-    private FoodpieceRepository foodpieceRepository;
+    private FoodpieceService foodpieceService;
 
     @Autowired
     private FoodpieceInOrderRepository foodpieceInOrderRepository;
@@ -24,5 +27,34 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public List<Order> getComposedOrders() {
         return orderRepository.findAllByTimeIsNotNull();
+    }
+
+    @Override
+    public void createOrder(OrderForm orderForm) {
+        Order order = Order.builder()
+                .time(LocalDateTime.now())
+                .ready(false)
+                .archived(false)
+                .build();
+        final Order finalOrder = orderRepository.saveAndFlush(order);
+        final float[] sum = {0.0f};
+
+        orderForm.getFoodpieces()
+                .entrySet()
+                .stream()
+                .filter(entry -> entry.getValue() != 0)
+                .forEach(entry -> {
+                    Foodpiece foodpiece = foodpieceService.getFoodpiece(entry.getKey());
+                    sum[0] += foodpiece.getCost()*entry.getValue();
+                    FoodpieceInOrder fio = FoodpieceInOrder.builder()
+                            .foodpiece(foodpiece)
+                            .order(finalOrder)
+                            .amount(entry.getValue())
+                            .build();
+                    foodpieceInOrderRepository.save(fio);
+                });
+        foodpieceInOrderRepository.flush();
+        finalOrder.setSum(sum[0]);
+        orderRepository.save(finalOrder);
     }
 }
