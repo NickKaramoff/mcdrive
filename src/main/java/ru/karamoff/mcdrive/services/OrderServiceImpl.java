@@ -75,8 +75,7 @@ public class OrderServiceImpl implements OrderService {
         return order.getReady();
     }
 
-    @Override
-    public boolean updateOrderReadiness(Order order) {
+    private boolean updateOrderReadiness(Order order) {
         boolean ready = true;
         for (FoodpieceInOrder fio : order.getFoodpieces()) {
             if (!fio.getReady()) {

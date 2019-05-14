@@ -1,0 +1,58 @@
+{% extends "common/wrap.twig" %}
+
+{% block title %}Сотрудники{% endblock %}
+
+{% block content %}
+    {% include "partials/header.twig" with {activeTab: 'employees', role: 'admin'} %}
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 col-lg-9 mb-3">
+                <a href="/employees/new" type="button"
+                   class="btn btn-outline-secondary btn-lg btn-block mb-3">
+                    Добавить сотрудника
+                </a>
+                <div class="list-group">
+                    {% for employee in employees %}
+                        <div class="list-group-item flex-column align-items-start order">
+                            <div class="d-flex w-100 justify-content-between align-items-center">
+                                <h3>
+                                    <a style="cursor:pointer"
+                                       type="button"
+                                       class="delete-button"
+                                    onclick="deleteEmployee({{ employee.id }})">
+                                        <span>&times;</span>
+                                    </a>
+                                    {{ employee.name }}
+                                </h3>
+                                <div>
+                                    <div class="text-right">
+                                        <p class="my-0 text-muted">{{ employee.email }}</p>
+                                        <p class="my-0">{{ employee.role }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+            {% include 'partials/sidebar.twig' %}
+        </div>
+    </div>
+{% endblock %}
+
+{% block scripts %}
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+    <script>
+        function initPage() {}
+
+        function deleteEmployee(id) {
+            axios.delete(
+                "/employees/remove",
+                {headers: {"Content-Type": "application/json"},
+                    data: {"id": id}}
+            ).then(()=>window.location.reload());
+        }
+    </script>
+{% endblock %}

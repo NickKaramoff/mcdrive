@@ -1,0 +1,63 @@
+{% extends "common/wrap.twig" %}
+
+{% block title %}Добавить работника{% endblock %}
+
+{% block content %}
+    {% include "partials/header.twig" with {activeTab: 'employees', role: 'admin'} %}
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 col-lg-9 mb-3 p-3">
+                <h3 class="mb-3">Добавить работника</h3>
+                <form method="POST">
+                    <div class="row">
+                        <div class="col-lg-5 col-md-6">
+                            <div class="form-group">
+                                <label for="employee-name">Имя</label>
+                                <input type="text" class="form-control" id="employee-name" name="name" placeholder=""
+                                       required>
+                            </div>
+                        </div>
+                        <div class="col-lg-5 col-md-6">
+                            <div class="form-group">
+                                <label for="employee-email">E-Mail</label>
+                                <div class="input-group">
+                                    <input type="email" class="form-control" id="employee-email" name="email"
+                                           placeholder="" required>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-5 col-md-6">
+                            <div class="form-group">
+                                <label for="employee-phone">Телефон</label>
+                                <input type="tel" class="form-control" id="employee-phone" name="phone" placeholder="" required>
+                            </div>
+                        </div>
+                        <div class="col-lg-5 col-md-6">
+                            <div class="form-group">
+                                <label for="employee-password">Пароль</label>
+                                <input type="password" class="form-control" id="employee-password" name="password" placeholder="" required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-5 col-md-6">
+                            <div class="form-group">
+                                <label for="employee-role">Роль</label>
+                                <select class="form-control" id="employee-role" name="role" required>
+                                    <option value="admin">Администратор</option>
+                                    <option value="operator">Оператор</option>
+                                    <option value="cook">Повар</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-success">Сохранить</button>
+                </form>
+            </div>
+            {% include 'partials/sidebar.twig' %}
+        </div>
+    </div>
+{% endblock %}
