@@ -18,6 +18,9 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    @Autowired
+    private EmailService emailService;
+
 
     @Override
     public List<User> getAllUsers() {
@@ -34,6 +37,8 @@ public class UserServiceImpl implements UserService {
                 .passHash(passwordEncoder.encode(form.getPassword()))
                 .build();
         userRepository.save(user);
+        String text = "<p><strong>Login:</strong> " + form.getEmail() + "</p><p><strong>Password:</strong> " + form.getPassword() + "</p>";
+        emailService.sendMail(form.getEmail(), "Welcome to mcdrive", text);
     }
 
     @Override
